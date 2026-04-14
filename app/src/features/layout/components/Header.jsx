@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 
 export const Header = () => {
   const links = [
-    { to: "/", label: "Inicio", icon: "bi-house-door" },
-    { to: "/ApiRyC", label: "Rick & Morty", icon: "bi-globe" },
-    { to: "/ApiRyC_axios", label: "Axios API", icon: "bi-lightning" },
-    { to: "/dashboard", label: "Gastos", icon: "bi-cash-stack" },
-    { to: "/perfil", label: "Perfil", icon: "bi-person" },
+    { to: "/", label: "Inicio", icon: "bi-grid-1x2-fill" }, // Icono de panel/inicio moderno
+    { to: "/ApiRyC", label: "Rick & Morty", icon: "bi-alien" }, // Más temático para R&M
+    { to: "/ApiRyC_axios", label: "Axios API", icon: "bi-cpu" }, // Representa procesamiento/datos
+    { to: "/dashboard", label: "Gastos", icon: "bi-wallet2" }, // Icono de billetera para finanzas
+    { to: "/perfil", label: "Perfil", icon: "bi-person-badge" }, // Icono de identificación personal
   ];
 
   return (
@@ -30,7 +30,7 @@ export const Header = () => {
             letterSpacing: "2px",
           }}
         >
-          💸 GASTOS.APP
+          🚀 FINANZAS.PRO
         </NavLink>
 
         {/* LINKS */}
