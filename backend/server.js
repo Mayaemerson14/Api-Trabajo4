@@ -9,24 +9,13 @@ const Gasto = require("./models/gasto");
 
 const app = express();
 
-// ================= CONFIG =================
-// Usará el puerto del .env (3000) o el 4000 por defecto
-const PORT = process.env.PORT || 4000;
-
 // ================= MIDDLEWARE =================
+// CORS abierto para permitir conexiones desde cualquier URL de Vercel
+app.use(cors()); 
 app.use(express.json());
 
-// Configuración de CORS única y limpia
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://api-gastos-sandy.vercel.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// ================= CONFIG =================
+const PORT = process.env.PORT || 4000;
 
 // ================= CONEXIÓN MONGO =================
 mongoose
@@ -54,7 +43,6 @@ const auth = (req, res, next) => {
 // ================= AUTH ROUTES =================
 
 app.post("/api/auth/register", async (req, res) => {
-  console.log("Datos recibidos en registro:", req.body);
   try {
     const { name, email, password } = req.body;
 
@@ -63,10 +51,7 @@ app.post("/api/auth/register", async (req, res) => {
       return res.status(400).json({ message: "El correo ya está registrado" });
     }
 
-    // Usamos .create que guarda automáticamente en la colección
     const user = await User.create({ name, email, password });
-    console.log("✅ Usuario guardado en la BD:", user.email);
-    
     res.status(201).json({ message: "Usuario registrado", user });
   } catch (error) {
     console.error("❌ Error en registro:", error);
@@ -146,7 +131,12 @@ app.put("/api/gastos/:id", auth, async (req, res) => {
   }
 });
 
+// Ruta de prueba para verificar que el backend responde en Vercel
+app.get("/", (req, res) => {
+  res.send("Servidor de GastosApp funcionando 🚀");
+});
+
 // ================= SERVER =================
 app.listen(PORT, () => {
-  console.log(`🔥 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🔥 Servidor corriendo en el puerto ${PORT}`);
 });
