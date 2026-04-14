@@ -1,10 +1,9 @@
 import axios from "axios";
 
-// Cambiamos la URL para que apunte a tu servidor local (puerto 3000)
-const API_URL = "http://localhost:3000";
+// Cambiamos la URL de localhost a tu nueva URL de Vercel
+const API_URL = "https://api-trabajo4.vercel.app";
 
 export const registerUser = async (data) => {
-  // El return es necesario para que tu componente reciba la respuesta
   return await axios.post(`${API_URL}/api/auth/register`, data);
 };
 
